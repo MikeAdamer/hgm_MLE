@@ -11,11 +11,11 @@
 }
 \usage{
 hgm.MLEso3(Y,X = c(0.01, 0.005, 0),
-           ord=21,method="H-BFGS")
+           ord=20,method="H-BFGS")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Y}{A 3 by 3 matrix of the sample mean.}
+  \item{Y}{The sample mean, a  3 by 3 matrix.}
   \item{X}{(optional) A 1 by 3 vector giving the start point of the optimization algoritm. The default is \eqn{(0.01, 0.005, 0)}. See Details section below.}
   \item{ord}{(optional) The order at which to truncate the series expansion for the normalising constant.
   This is used to calculate the starting values of the normalising constant and its gradient. 

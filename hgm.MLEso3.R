@@ -262,7 +262,7 @@ hgm.ma.MLEso3 <- function(Y,X = c(0.01, 0.005, 0),ord=21,method="H-BFGS")
   names(MLE) <- c("parameter", "value")
     
   # If the singular values are too close to unity or explicitly desired the asymptotic formula is used
-  if ((1-max(abs(d)) < 1e-3) || (method=="Asymptotic"))
+  if ((method=="Asymptotic") || (1-max(abs(d)) < 1e-3))
   {
     # Use the asymptotic formula
     X1 <- (0.5*(1 + 2*d[1] - 3*d[1]^2 - 2*d[2] + 2*d[1]*d[2] + d[2]^2 - 2*d[3] + 2*d[1]*d[3] - 2*d[2]*d[3] + 
@@ -281,7 +281,7 @@ hgm.ma.MLEso3 <- function(Y,X = c(0.01, 0.005, 0),ord=21,method="H-BFGS")
           d[2]^2*d[3] - d[3]^2 - d[1]*d[3]^2 - d[2]*d[3]^2 + d[3]^3)
     
     MLE$parameter <- SVD$u %*% diag(c(X1,X2,X3)) %*% SVD$v
-    MLE$value <- Likelihood(c(X1,X2,X3),d,E)
+    MLE$value <- -Likelihood(c(X1,X2,X3),d,E)
     return(MLE)
   }
   
